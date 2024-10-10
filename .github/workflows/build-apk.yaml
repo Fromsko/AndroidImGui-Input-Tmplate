@@ -8,7 +8,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  VERSION: v1.0.1  # 这里可以动态生成版本号，确保与上次不同
+  VERSION: v1.0.0
 
 jobs:
   build:
