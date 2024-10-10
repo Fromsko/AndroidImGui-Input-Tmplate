@@ -3,8 +3,7 @@ name: build-apk
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - dev
   workflow_dispatch:
 
 env:
