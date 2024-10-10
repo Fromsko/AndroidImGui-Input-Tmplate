@@ -56,6 +56,9 @@ jobs:
           name: app-release-apk
           path: app/build/outputs/apk/release/app-release-unsigned.apk  # 上传未签名APK
 
+      - name: Generate Changelog
+        run: echo "# Good things have arrived" > ${{ github.workspace }}-CHANGELOG.txt
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
