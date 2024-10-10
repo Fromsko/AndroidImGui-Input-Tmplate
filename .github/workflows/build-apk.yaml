@@ -8,7 +8,7 @@ on:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  VERSION: v1.0.0  # 这里可以动态生成版本号
+  VERSION: v1.0.1  # 这里可以动态生成版本号，确保与上次不同
 
 jobs:
   build:
@@ -69,15 +69,11 @@ jobs:
           prerelease: false
         continue-on-error: true  # 即使出错也继续执行
 
-      - name: Check if release was created
-        if: steps.create_release.outcome == 'success'  # 只有在创建成功时执行
-        run: echo "Release created successfully"
-
       - name: Publish version
         if: steps.create_release.outcome == 'success'  # 只有在创建成功时执行
         uses: softprops/action-gh-release@v2.0.8
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          tag_name: ${{ env.VERSION }}  # 添加 tag_name 参数
           body_path: ${{ github.workspace }}-CHANGELOG.txt
           files: |
             app/build/outputs/apk/release/app-release-unsigned.apk
