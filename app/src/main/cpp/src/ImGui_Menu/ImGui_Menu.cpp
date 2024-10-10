@@ -15,11 +15,11 @@ void ImGui_Menu::MainMenu() {
     ImGui::Begin("Sak_Text_Input", nullptr,windowflags);
     ImGui::Text("FPS: %.1f", framerate);
     ImGui::InputTextWithHint("账号","请输入账号", this->account, IM_ARRAYSIZE(this->account));
-    ImGui::InputTextWithHint("密码", "请输入密码",this->password, IM_ARRAYSIZE(this->password));
+    ImGui::InputTextWithHint("密码", "请输入密码", this->password, IM_ARRAYSIZE(this->password));
     if(ImGui::Button("登录")){
         if (strcmp(account, "") == 0 || strcmp(password, "") == 0) {
             hint = "账户名和密码不能为空!";
-        } else if (strcmp(account, "Sak") == 0 && strcmp(password, "QQ:1276787482") == 0){
+        } else if (strcmp(account, "root") == 0 && strcmp(password, "root") == 0){
             hint = "登录成功!";
         }else{
             hint = "账号密码错误!";
