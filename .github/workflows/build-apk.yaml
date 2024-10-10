@@ -67,11 +67,16 @@ jobs:
           release_name: Release ${{ env.VERSION }}
           draft: false
           prerelease: false
+        continue-on-error: true  # 即使出错也继续执行
 
-      - name: publish version
+      - name: Check if release was created
+        if: steps.create_release.outcome == 'success'  # 只有在创建成功时执行
+        run: echo "Release created successfully"
+
+      - name: Publish version
+        if: steps.create_release.outcome == 'success'  # 只有在创建成功时执行
         uses: softprops/action-gh-release@v2.0.8
         with:
-          tag_name: ${{ env.VERSION }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           body_path: ${{ github.workspace }}-CHANGELOG.txt
           files: |
