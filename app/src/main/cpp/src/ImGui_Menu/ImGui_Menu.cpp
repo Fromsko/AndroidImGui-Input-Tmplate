@@ -9,6 +9,7 @@ ImGuiWindowFlags_NoCollapse;
 
 static float beginHeight  = 0.0f;
 std::string hint = {};
+bool OpenPanel = false;
 
 // 定义面板状态
 enum PanelState
@@ -333,11 +334,20 @@ void ImGui_Menu::MainMenu() {
             hint = "账户名和密码不能为空!";
         } else if (strcmp(account, "root") == 0 && strcmp(password, "root") == 0){
             hint = "登录成功!";
-            ShowMainWindowTwo(true);
+            OpenPanel = true;
+
         }else{
+            OpenPanel = false;
             hint = "账号密码错误!";
         }
     }
+
+    // 创建勾选框
+    ImGui::Checkbox("面板开关", &OpenPanel);
+
+    // 根据勾选框的状态执行相应的操作
+    if (OpenPanel) ShowMainWindowTwo(OpenPanel);
+
     ImGui::Text(hint.c_str());
     ImGui::End();
 }
